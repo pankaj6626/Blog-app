@@ -17,9 +17,16 @@ const MONOGO_URL = process.env.MONOG_URI;
 //middleware
 app.use(express.json());
 app.use(cookieParser());
+const allowedOrigins = ["https://blog-app-dp.vercel.app"];
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
