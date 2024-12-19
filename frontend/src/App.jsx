@@ -31,7 +31,7 @@ function App() {
       <Routes>
         <Route
           exact
-          path="/"
+          path="/login"
           element={token ? <Home /> : <Navigate to={"/login"} />}
         />
         <Route exact path="/blogs" element={<Blogs />} />
